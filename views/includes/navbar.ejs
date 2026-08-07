@@ -1,0 +1,127 @@
+<style>
+.search-btn {
+    background-color: #fe424d !important;
+    color: #fff !important;
+    border: none;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-btn:hover {
+    background-color: #e63946 !important;
+    color: #fff !important;
+}
+
+.search-btn i {
+    color: #fff !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.search-btn:hover i {
+    color: #fff !important;
+}
+
+.btn12 {
+  display:inline flex !important;
+  border-radius:20px !important;
+  padding:10px !important;
+} 
+
+.form input {
+  border-radius:20px;
+  margin-right:20px !important;
+}
+
+.logout {
+  border-radius:20px !important;
+  padding:15px !important;
+  width:90px !important;
+  margin-left:20px !important;
+}
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container-fluid px-4">
+
+    <a class="navbar-brand fw-bold" href="/listings">
+      <i class="fa-solid fa-compass"></i> WanderLust
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link fw-medium" href="/listings">Explore</a>
+        </li>
+      </ul>
+
+      <form class="d-flex mx-auto form" role="search">
+        <input
+          class="form-control me-2 search-inp"
+          type="search"
+          placeholder="Search destination"
+          aria-label="Search"
+        />
+
+        <button class="btn search-btn btn12" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Search</span>
+        </button>
+      </form>
+
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+
+        <li class="nav-item">
+          <a class="nav-link fw-medium" href="/listings/new">
+            Airbnb your home
+          </a>
+        </li>
+
+        <% if(!currUser){ %>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-danger btn-sm" href="/users/signup">
+              <b>Sign up</b>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="btn btn-danger btn-sm" href="/users/login">
+              <b>Log in</b>
+            </a>
+          </li>
+
+        <% } else { %>
+
+          <li class="nav-item">
+            <a class="btn btn-outline-dark btn-sm logout" href="/users/logout">
+              Log out
+            </a>
+          </li>
+
+        <% } %>
+
+      </ul>
+
+    </div>
+
+  </div>
+</nav>  
