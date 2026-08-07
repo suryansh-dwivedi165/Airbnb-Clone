@@ -18,6 +18,10 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js"); 
 
+app.get("/", (req,res)=>{
+    res.redirect("/listings");
+});
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -83,15 +87,15 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/users", userRouter); 
 
-app.use((req, res) => {
-    throw new ExpressError(404, "Page Not Found");
-});
+app.all("*", (req,res,next)=>{
+    next(new ExpressError(404, "Page Not Found"));
+}); 
  
 app.use((err, req, res, next) => {
     console.log("🔥 ERROR:", err);
-    let { status = 500, message = "Something went wrong" } = err;
+    let { statuscode = 500, message = "Something went wrong" } = err;
 
-    res.status(status).send(message);
+    res.status(statuscode).send(message);
 });
 
 app.listen(port, () => {
