@@ -86,11 +86,13 @@ app.use("/users", userRouter);
 app.use((req, res) => {
     throw new ExpressError(404, "Page Not Found");
 });
-
+ 
 app.use((err, req, res, next) => {
-  let { status=500, message="Something went wrong"} = err; 
-  res.status(status).render("listings/error.ejs", {message}); 
-}) 
+    console.log("🔥 ERROR:", err);
+    let { status = 500, message = "Something went wrong" } = err;
+
+    res.status(status).send(message);
+});
 
 app.listen(port, () => {
     console.log("Server is listening "); 
