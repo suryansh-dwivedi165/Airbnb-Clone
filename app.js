@@ -87,14 +87,12 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/users", userRouter); 
 
-app.all("*", (req,res,next)=>{
+app.all("/{*any}", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"));
 }); 
  
 app.use((err, req, res, next) => {
-    console.log("🔥 ERROR:", err);
     let { statuscode = 500, message = "Something went wrong" } = err;
-
     res.status(statuscode).send(message);
 });
 
