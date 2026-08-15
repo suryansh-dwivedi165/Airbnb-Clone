@@ -94,8 +94,9 @@ app.all("/{*any}", (req, res, next) => {
  
 app.use((err, req, res, next) => {
     let { statuscode = 500, message = "Something went wrong" } = err;
-    // res.status(statuscode).send(message);
-    res.redirect("/listings");
+     console.log("ERROR:", err);
+
+    res.status(statuscode).send(message);
 });
 
 app.listen(port, () => {
