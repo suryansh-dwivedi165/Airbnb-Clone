@@ -30,6 +30,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const dbUrl = process.env.ATLASDB_URL;
+console.log(process.env.ATLASDB_URL); 
 
 main()
     .then(() => {
@@ -42,7 +43,7 @@ main()
 async function main() {
     await mongoose.connect(dbUrl);
 } 
-
+ 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: {
@@ -93,7 +94,8 @@ app.all("/{*any}", (req, res, next) => {
  
 app.use((err, req, res, next) => {
     let { statuscode = 500, message = "Something went wrong" } = err;
-    res.status(statuscode).send(message);
+    // res.status(statuscode).send(message);
+    res.redirect("/listings");
 });
 
 app.listen(port, () => {
